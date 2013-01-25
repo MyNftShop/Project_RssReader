@@ -11,7 +11,7 @@ import android.widget.Toast;
 public class FirstPage extends Activity {
 
 	
-	protected static final long DELAY_MILLONS = 3000;
+	protected static final long DELAY_MILLONS =0;//default is 3000
 	private Handler mHandler=new Handler(){
 
 		@Override
