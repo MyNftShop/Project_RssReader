@@ -38,7 +38,9 @@ public final class R {
         public static final int bottom_menu=0x7f030000;
         public static final int first_page=0x7f030001;
         public static final int list_mych=0x7f030002;
-        public static final int main_title=0x7f030003;
+        public static final int list_mychview=0x7f030003;
+        public static final int main_title=0x7f030004;
+        public static final int view_detail=0x7f030005;
     }
     public static final class menu {
         public static final int activity_main=0x7f060000;
@@ -71,7 +73,6 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f050000;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f050003;
         /**  User's style 

@@ -8,6 +8,17 @@ import android.content.Intent;
 import android.view.Menu;
 import android.widget.Toast;
 
+/**
+ * 
+ * 描述：首页显示
+ * 
+ * @author sangxiaokai 
+ * @email sangxiaokai@qq.com
+ * @phone +86 15237210133
+ * Copyright © 2013-2113 Sang Puyuan. All rights reserved. 
+ * You can not use it for any commercial purposes
+ *
+ */
 public class FirstPage extends Activity {
 
 	
@@ -19,7 +30,7 @@ public class FirstPage extends Activity {
 			// TODO Auto-generated method stub
 			if (msg.what==0) {
 				//执行完之后的动作
-				Intent intent=new Intent(FirstPage.this, MyChListActivity.class);
+				Intent intent=new Intent(FirstPage.this, MyChannalsActivity.class);
 				startActivity(intent);
 				FirstPage.this.finish();
 //				Toast.makeText(FirstPage.this, "Go to Activity Main", Toast.LENGTH_SHORT).show();
