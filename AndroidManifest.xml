@@ -35,6 +35,10 @@
             android:name="com.reader.rss.MyRssDetailActivity"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity
+            android:name="com.reader.rss.AddChannalActivity"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>

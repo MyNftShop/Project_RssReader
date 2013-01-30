@@ -262,6 +262,11 @@ public class MyChannalsActivity extends Activity implements OnClickListener {
 
 	private void doAddCh() {
 		Toast.makeText(this, "Do 添加频道", Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(this, AddChannalActivity.class);
+//		Bundle bundle = new Bundle();
+//		bundle.putString(NameSpacesOfMy.BUNDLE_KEY_INTENT_URL, url);
+//		intent.putExtras(bundle);
+		startActivityForResult(intent,0);
 	}
 
 }
