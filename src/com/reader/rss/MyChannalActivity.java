@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.reader.rss.config.NameSpacesOfMy;
+import com.reader.rss.config.NamingSpace;
 import com.reader.rss.entry.RSSChannal;
 import com.reader.rss.entry.RSSItem;
 import com.reader.rss.entry.RSSItems;
+import com.reader.rss.entry.RSSItem.RSSItemColumns;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -87,7 +88,7 @@ public class MyChannalActivity extends Activity implements OnClickListener {
 		Log.i(TAG, "GoToChannal url=" + url);
 		Intent intent = new Intent(this, MyRssDetailActivity.class);
 		Bundle bundle = new Bundle();
-		bundle.putString(NameSpacesOfMy.BUNDLE_KEY_INTENT_URL, url);
+		bundle.putString(NamingSpace.BUNDLE_KEY_INTENT_URL, url);
 		intent.putExtras(bundle);
 		startActivity(intent);
 	}
@@ -108,7 +109,7 @@ public class MyChannalActivity extends Activity implements OnClickListener {
 				Map<String, String> itemMap = new HashMap<String, String>();
 				itemMap = (HashMap<String, String>) parent
 						.getItemAtPosition(position);
-				String channalLink=itemMap.get(RSSChannal.KEY_LINK);
+				String channalLink=itemMap.get(RSSItemColumns.KEY_LINK);
 				GoToDetail(channalLink);
 			}
 		});
@@ -121,7 +122,7 @@ public class MyChannalActivity extends Activity implements OnClickListener {
 	 */
 	private void configListViewAdapter() {
 		// TODO Auto-generated method stub
-		String from[] = { RSSItem.KEY_TITLE, RSSItem.KEY_LINK };
+		String from[] = { RSSItemColumns.KEY_TITLE, RSSItemColumns.KEY_LINK };
 		int to[] = { android.R.id.text1, android.R.id.text2 };
 		adapter = new SimpleAdapter(this, mRssItems.getAllItemsForListView(),
 				android.R.layout.simple_list_item_2, from, to);

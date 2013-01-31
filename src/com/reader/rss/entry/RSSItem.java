@@ -1,5 +1,7 @@
 package com.reader.rss.entry;
 
+import android.provider.BaseColumns;
+
 
 /**
  * 
@@ -13,16 +15,21 @@ package com.reader.rss.entry;
  */
 public class RSSItem {
 
-	public static final String KEY_TITLE = "title";
-	public static final String KEY_LINK = "link";
-	public static final String KEY_CATEGORY = "category";
-	public static final String KEY_DESCRIPTION = "description";
-	public static final String KEY_PUBDATE = "pubDate";
 	public  String _title = null;
 	public  String _pubdate = null;
 	public  String _link = null;
 	public  String _category = null;
 	public  String _description = null;
+	public static class RSSItemColumns implements BaseColumns {
+		private RSSItemColumns() {
+		}
+		public static final String KEY_TITLE = "title";
+		public static final String KEY_LINK = "link";
+		public static final String KEY_CATEGORY = "category";
+		public static final String KEY_DESCRIPTION = "description";
+		public static final String KEY_PUBDATE = "pubDate";
+	}
+
 
 	public RSSItem() {
 	}

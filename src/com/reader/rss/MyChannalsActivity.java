@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.reader.rss.config.NameSpacesOfMy;
+import com.reader.rss.config.NamingSpace;
 import com.reader.rss.entry.RSSChannal;
+import com.reader.rss.entry.RSSChannal.RSSChannalColumns;
 import com.reader.rss.entry.RSSChannals;
+import com.reader.rss.lib.MyContentHelper;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -86,7 +88,7 @@ public class MyChannalsActivity extends Activity implements OnClickListener {
 		Toast.makeText(this, "Do 打开频道\n"+url, Toast.LENGTH_SHORT).show();
 		Intent intent = new Intent(this, MyChannalActivity.class);
 		Bundle bundle = new Bundle();
-		bundle.putString(NameSpacesOfMy.BUNDLE_KEY_INTENT_URL, url);
+		bundle.putString(NamingSpace.BUNDLE_KEY_INTENT_URL, url);
 		intent.putExtras(bundle);
 		startActivity(intent);
 	}
@@ -107,7 +109,7 @@ public class MyChannalsActivity extends Activity implements OnClickListener {
 				Map<String, String> itemMap = new HashMap<String, String>();
 				itemMap = (HashMap<String, String>) parent
 						.getItemAtPosition(position);
-				String channalLink=itemMap.get(RSSChannal.KEY_LINK);
+				String channalLink=itemMap.get(RSSChannalColumns.KEY_LINK);
 				GoToChannal(channalLink);
 			}
 		});
@@ -115,12 +117,27 @@ public class MyChannalsActivity extends Activity implements OnClickListener {
 	}
 	
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		//
+		refreshView();
+	}
+
+	/**
+	 * 刷新显示页面
+	 */
+	private void refreshView() {
+		
+	}
+
 	/**
 	 * 配置listview数据的adapter,显示方式
 	 */
 	private void configListViewAdapter() {
 		// TODO Auto-generated method stub
-		String from[] = { RSSChannal.KEY_TITLE, RSSChannal.KEY_LINK };
+		String from[] = { RSSChannalColumns.KEY_TITLE, RSSChannalColumns.KEY_LINK };
 		int to[] = { android.R.id.text1, android.R.id.text2 };
 		adapter = new SimpleAdapter(this, mChannals.getAllItemsForListView(),
 				android.R.layout.simple_list_item_2, from, to);
@@ -138,66 +155,9 @@ public class MyChannalsActivity extends Activity implements OnClickListener {
 	 * 写入准备数据
 	 */
 	private void prepareData() {
-		mChannals=getMyChannals();
-//		data = new ArrayList<Map<String, Object>>();
-//		Map<String, Object> item = null;
-//		// add baidu
-//		item = new HashMap<String, Object>();
-//		item.put(RSSChannal.KEY_TITLE, "baidu");
-//		item.put(RSSChannal.KEY_LINK,
-//				"http://news.baidu.com/n?cmd=1&class=civilnews&tn=rss");
-//		data.add(item);
-//		// add 163
-//		item = new HashMap<String, Object>();
-//		item.put(RSSChannal.KEY_TITLE, "163");
-//		item.put(RSSChannal.KEY_LINK,
-//				"http://news.163.com/special/00011K6L/rss_newstop.xml");
-//		data.add(item);
-//		// add 163
-//		item = new HashMap<String, Object>();
-//		item.put(RSSChannal.KEY_TITLE, "QQ");
-//		item.put(RSSChannal.KEY_LINK,
-//				"http://news.qq.com/newsgn/rss_newsgn.xml");
-//		data.add(item);
-//		// add 163
-//		item = new HashMap<String, Object>();
-//		item.put(RSSChannal.KEY_TITLE, "南方");
-//		item.put(RSSChannal.KEY_LINK, "http://www.southcn.com/rss/default.xml");
-//		data.add(item);
-//		// add 163
-//		item = new HashMap<String, Object>();
-//		item.put(RSSChannal.KEY_TITLE, "南方航空");
-//		item.put(RSSChannal.KEY_LINK, "http://www.southcn.com/rss/default.xml");
-//		data.add(item);
+		MyContentHelper helper=new MyContentHelper(this);
+		mChannals=helper.getRSSChannals(null);
 
-	}
-
-	private RSSChannals getMyChannals() {
-		// TODO Auto-generated method stub
-		RSSChannals channals=new RSSChannals();
-		RSSChannal channal = new RSSChannal();
-		//add
-		channal=new RSSChannal();
-		channal.setTitle("baidu");
-		channal.setLink("http://news.baidu.com/n?cmd=1&class=civilnews&tn=rss");
-		channals.addItem(channal);
-		//add
-		channal=new RSSChannal();
-		channal.setTitle("163");
-		channal.setLink("http://news.163.com/special/00011K6L/rss_newstop.xml");
-		channals.addItem(channal);
-		//add
-		channal=new RSSChannal();
-		channal.setTitle("南方航空");
-		channal.setLink("http://www.southcn.com/rss/default.xml");
-		channals.addItem(channal);
-		//add
-		channal=new RSSChannal();
-		channal.setTitle("QQ");
-		channal.setLink("http://news.qq.com/newsgn/rss_newsgn.xml");
-		channals.addItem(channal);
-		
-		return channals;
 	}
 
 	/**

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import com.reader.rss.entry.RSSItem.RSSItemColumns;
+
 import android.nfc.Tag;
 import android.util.Log;
 
@@ -48,11 +50,11 @@ public class RSSItems {
 		int size = itemList.size();
 		for (int i = 0; i < size; i++) {
 			HashMap<String, Object> item = new HashMap<String, Object>();
-			item.put(RSSItem.KEY_TITLE, itemList.get(i).getTitle());
-			item.put(RSSItem.KEY_LINK, itemList.get(i).getLink());
-			item.put(RSSItem.KEY_DESCRIPTION, itemList.get(i).getDescription());
-			item.put(RSSItem.KEY_PUBDATE, itemList.get(i).getPubdate());
-			Log.i(TAG, "item: "+item.get(RSSItem.KEY_TITLE));
+			item.put(RSSItemColumns.KEY_TITLE, itemList.get(i).getTitle());
+			item.put(RSSItemColumns.KEY_LINK, itemList.get(i).getLink());
+			item.put(RSSItemColumns.KEY_DESCRIPTION, itemList.get(i).getDescription());
+			item.put(RSSItemColumns.KEY_PUBDATE, itemList.get(i).getPubdate());
+			Log.i(TAG, "item: "+item.get(RSSItemColumns.KEY_TITLE));
 			data.add(item);
 		}
 		return data;

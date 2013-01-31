@@ -1,5 +1,6 @@
 package com.reader.rss.entry;
 
+import android.provider.BaseColumns;
 import android.util.EventLogTags.Description;
 
 /**
@@ -17,14 +18,20 @@ import android.util.EventLogTags.Description;
  */
 public class RSSChannal {
 	private static final String TAG = "RSSChannel";
-	public static final String KEY_TITLE = "_title";
-	public static final String KEY_LINK = "_link";
-	public static final String KEY_IMAGE_URL = "_imageUrl";
-	public static final String KEY_DESCRIPTION = "_description";
 	private String _title = null;
 	private String _link = null;
 	private String _imageUrl = null;
 	private String _description = null;
+	
+	public static class RSSChannalColumns implements BaseColumns {
+		private RSSChannalColumns() {
+		}
+		public static final String KEY_TITLE = "_title";
+		public static final String KEY_LINK = "_link";
+		public static final String KEY_IMAGE_URL = "_imageUrl";
+		public static final String KEY_DESCRIPTION = "_description";
+	}
+
 	
 	public RSSChannal() {
 		// TODO Auto-generated constructor stub

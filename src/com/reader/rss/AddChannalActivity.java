@@ -266,6 +266,7 @@ public class AddChannalActivity extends Activity {
 	private void InitCursorView() {
 		Log.i("main", "init image view");
 		cursor=(ImageView)findViewById(R.id.cursor);
+		
 		bmpW=BitmapFactory.decodeResource(getResources(),R.drawable.a).getWidth();
 		DisplayMetrics dm=new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);

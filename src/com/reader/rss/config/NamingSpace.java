@@ -8,8 +8,15 @@ package com.reader.rss.config;
  * @email sangxiaokai@qq.com
  * @phone +86 15237210133
  */
-public class NameSpacesOfMy {
+public class NamingSpace {
 	public static final String BUNDLE_KEY_INTENT_URL = "url";
+	
+	//FOR DATABASE
+	public static final String DB_DABASENAME = "database";
+
+	public static final int DATABASE_VERSION =1 ;//当前数据库版本
+
+	public static final String CHANNALS_TABLENAME = "channals";
 	
 
 }
