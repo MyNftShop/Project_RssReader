@@ -17,6 +17,8 @@ public class NamingSpace {
 	public static final int DATABASE_VERSION =1 ;//当前数据库版本
 
 	public static final String CHANNALS_TABLENAME = "channals";
+
+	public static final String KEY_OPRATION = "operation";
 	
 
 }

@@ -17,12 +17,21 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
+            android:text="最新"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
             android:text="排行"
             android:textColor="#000000"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/text2"
+            android:id="@+id/text3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
@@ -32,7 +41,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/text3"
+            android:id="@+id/text4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
@@ -59,7 +68,12 @@
                 android:scaleType="matrix"
                 android:src="@drawable/a" />
         </LinearLayout>
-    
+     <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="#cccccccc" >
+            </View>
+            
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vPager"

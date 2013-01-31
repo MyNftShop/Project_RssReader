@@ -21,24 +21,25 @@ public final class R {
         public static final int selector=0x7f020007;
     }
     public static final class id {
-        public static final int bottom_menuReLayout=0x7f07000b;
-        public static final int cursor=0x7f070003;
-        public static final int imageButton1=0x7f070005;
-        public static final int imageButton2=0x7f070006;
-        public static final int imageButton3=0x7f070007;
-        public static final int imageView1=0x7f070009;
-        public static final int imageView2=0x7f07000f;
-        public static final int linearLayout1=0x7f070008;
-        public static final int listView1=0x7f07000c;
-        public static final int menu_settings=0x7f070011;
+        public static final int bottom_menuReLayout=0x7f07000c;
+        public static final int cursor=0x7f070004;
+        public static final int imageButton1=0x7f070006;
+        public static final int imageButton2=0x7f070007;
+        public static final int imageButton3=0x7f070008;
+        public static final int imageView1=0x7f07000a;
+        public static final int imageView2=0x7f070010;
+        public static final int linearLayout1=0x7f070009;
+        public static final int listView1=0x7f07000d;
+        public static final int menu_settings=0x7f070012;
         public static final int text1=0x7f070000;
         public static final int text2=0x7f070001;
         public static final int text3=0x7f070002;
-        public static final int textView1=0x7f07000a;
-        public static final int titleRelativeLayout1=0x7f07000d;
-        public static final int titleTextView1=0x7f070010;
-        public static final int titlelinearLayout1=0x7f07000e;
-        public static final int vPager=0x7f070004;
+        public static final int text4=0x7f070003;
+        public static final int textView1=0x7f07000b;
+        public static final int titleRelativeLayout1=0x7f07000e;
+        public static final int titleTextView1=0x7f070011;
+        public static final int titlelinearLayout1=0x7f07000f;
+        public static final int vPager=0x7f070005;
     }
     public static final class layout {
         public static final int add_channal=0x7f030000;
@@ -47,10 +48,12 @@ public final class R {
         public static final int lay1=0x7f030003;
         public static final int lay2=0x7f030004;
         public static final int lay3=0x7f030005;
-        public static final int list_mych=0x7f030006;
-        public static final int list_mychview=0x7f030007;
-        public static final int main_title=0x7f030008;
-        public static final int view_detail=0x7f030009;
+        public static final int list_common=0x7f030006;
+        public static final int list_common_item=0x7f030007;
+        public static final int list_mych=0x7f030008;
+        public static final int list_mychview=0x7f030009;
+        public static final int main_title=0x7f03000a;
+        public static final int view_detail=0x7f03000b;
     }
     public static final class menu {
         public static final int activity_main=0x7f060000;
