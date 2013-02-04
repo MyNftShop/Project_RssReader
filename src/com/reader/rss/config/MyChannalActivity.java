@@ -1,10 +1,14 @@
-package com.reader.rss;
+package com.reader.rss.config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.reader.rss.config.NamingSpace;
+import com.reader.rss.MyRssDetailActivity;
+import com.reader.rss.R;
+import com.reader.rss.R.id;
+import com.reader.rss.R.layout;
+import com.reader.rss.R.menu;
 import com.reader.rss.entry.RSSChannal;
 import com.reader.rss.entry.RSSItem;
 import com.reader.rss.entry.RSSItems;

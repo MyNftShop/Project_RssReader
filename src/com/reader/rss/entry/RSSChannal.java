@@ -33,6 +33,11 @@ public class RSSChannal {
 	}
 
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this._title+" "+this._link+" "+this._description ;
+	}
 	public RSSChannal() {
 		// TODO Auto-generated constructor stub
 	}

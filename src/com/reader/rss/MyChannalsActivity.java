@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.reader.rss.config.MyChannalActivity;
 import com.reader.rss.config.NamingSpace;
 import com.reader.rss.entry.RSSChannal;
 import com.reader.rss.entry.RSSChannal.RSSChannalColumns;

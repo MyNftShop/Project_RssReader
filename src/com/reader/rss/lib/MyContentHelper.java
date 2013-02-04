@@ -11,7 +11,7 @@ public class MyContentHelper extends BaseContentHelper{
 	/**
 	 * 获得频道列表，根据sort order
 	 * @param sortOrder
-	 * @return
+	 * @return {@link RSSChannals}
 	 */
 	public RSSChannals getRSSChannals(String sortOrder) {
 		

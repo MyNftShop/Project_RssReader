@@ -31,7 +31,7 @@ public class FirstPage extends Activity {
 			// TODO Auto-generated method stub
 			if (msg.what==0) {
 				//执行完之后的动作
-				Intent intent=new Intent(FirstPage.this, MyChannalsActivity.class);
+				Intent intent=new Intent(FirstPage.this, AddChannalActivity.class);
 				startActivity(intent);
 				FirstPage.this.finish();
 //				Toast.makeText(FirstPage.this, "Go to Activity Main", Toast.LENGTH_SHORT).show();
