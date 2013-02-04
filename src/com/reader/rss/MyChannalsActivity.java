@@ -2,14 +2,14 @@ package com.reader.rss;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import com.reader.rss.config.MyChannalActivity;
 import com.reader.rss.config.NamingSpace;
 import com.reader.rss.entry.RSSChannal;
 import com.reader.rss.entry.RSSChannal.RSSChannalColumns;
 import com.reader.rss.entry.RSSChannals;
-import com.reader.rss.lib.MyContentHelper;
+import com.reader.rss.lib.MyRSSChannalsDbHelper;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -50,7 +50,10 @@ public class MyChannalsActivity extends Activity implements OnClickListener {
 	 */
 	int btmBtnIds[] = { R.id.imageButton1, R.id.imageButton2, R.id.imageButton3 };
 	private SimpleAdapter adapter;
-	private RSSChannals mChannals=null;
+	private RSSChannals mChannals = null;
+	private ListView listView;
+	private List<? extends Map<String, ?>> arrayList;
+	private MyRSSChannalsDbHelper helper;;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class MyChannalsActivity extends Activity implements OnClickListener {
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
 				R.layout.main_title);
 
+		
 		prepareData();
 		initTitleView();
 		initListView();
@@ -81,56 +85,52 @@ public class MyChannalsActivity extends Activity implements OnClickListener {
 		}
 
 	}
+
 	/**
 	 * 打开频道
-	 * @param url
+	 * 
+	 * @param posi[]
 	 */
-	protected void GoToChannal(String url) {
-		Toast.makeText(this, "Do 打开频道\n"+url, Toast.LENGTH_SHORT).show();
+	protected void GoToChannal(int position) {
+		Log.i("tag", "GotoChannal:"+ position+arrayList.get(position).get(RSSChannalColumns.KEY_TITLE));
 		Intent intent = new Intent(this, MyChannalActivity.class);
 		Bundle bundle = new Bundle();
-		bundle.putString(NamingSpace.BUNDLE_KEY_INTENT_URL, url);
+		bundle.putString(NamingSpace.BUNDLE_KEY_INTENT_URL, (String)arrayList.get(position).get(RSSChannalColumns.KEY_LINK));	
+		bundle.putLong(NamingSpace.BUNDLE_KEY_INTENT_ID, (Long) arrayList.get(position).get(RSSChannalColumns._ID));
 		intent.putExtras(bundle);
 		startActivity(intent);
 	}
+
 	/**
-	 * 初始化频道列表
+	 * 初始化列表
 	 */
 	private void initListView() {
-		ListView listView = (ListView) findViewById(R.id.listView1);
+		listView = (ListView) findViewById(R.id.listView1);
 		configListViewAdapter();
 		listView.setAdapter(adapter);
-		//设置单击事件
+		// 设置单击事件
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@SuppressWarnings("unchecked")
 			@Override
 			public void onItemClick(AdapterView<?> parent, View arg1,
-					int position, long arg3) {
-				// TODO Auto-generated method stub
-				Map<String, String> itemMap = new HashMap<String, String>();
-				itemMap = (HashMap<String, String>) parent
-						.getItemAtPosition(position);
-				String channalLink=itemMap.get(RSSChannalColumns.KEY_LINK);
-				GoToChannal(channalLink);
+					int position, long id) {
+				GoToChannal(position);
+//				// TODO Auto-generated method stub
+//				Map<String, String> itemMap = new HashMap<String, String>();
+//				itemMap = (HashMap<String, String>) parent
+//						.getItemAtPosition(position);
+//				String channalLink = itemMap.get(RSSChannalColumns.KEY_LINK);
 			}
 		});
-		
+
 	}
-	
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		//
-		refreshView();
-	}
-
-	/**
-	 * 刷新显示页面
-	 */
-	private void refreshView() {
-		
+		refreshListView();
 	}
 
 	/**
@@ -138,27 +138,33 @@ public class MyChannalsActivity extends Activity implements OnClickListener {
 	 */
 	private void configListViewAdapter() {
 		// TODO Auto-generated method stub
-		String from[] = { RSSChannalColumns.KEY_TITLE, RSSChannalColumns.KEY_LINK };
+		String from[] = { RSSChannalColumns.KEY_TITLE,
+				RSSChannalColumns.KEY_LINK };
 		int to[] = { android.R.id.text1, android.R.id.text2 };
-		adapter = new SimpleAdapter(this, mChannals.getAllItemsForListView(),
+		adapter = new SimpleAdapter(this, arrayList,
 				android.R.layout.simple_list_item_2, from, to);
 	}
 
 	/**
 	 * 渲染频道列表
 	 */
-	private void renderListView() {
-		// TODO Auto-generated method stub
-
+	private void refreshListView() {
+		arrayList.clear();
+		mChannals=helper.getRSSChannals(null);
+		arrayList.addAll(mChannals.getAllItemsForListView());
+		Log.i("tag", "refresh count:"+mChannals.getItemCount());
+		adapter.notifyDataSetChanged();
 	}
 
 	/**
 	 * 写入准备数据
 	 */
 	private void prepareData() {
-		MyContentHelper helper=new MyContentHelper(this);
-		mChannals=helper.getRSSChannals(null);
-
+		helper = new MyRSSChannalsDbHelper(this);
+		mChannals = helper.getRSSChannals(null);
+		arrayList = new ArrayList<Map<String, ?>>();
+		arrayList = mChannals.getAllItemsForListView();
+		Log.i("tag", "prepare count:"+mChannals.getItemCount());
 	}
 
 	/**
@@ -166,13 +172,13 @@ public class MyChannalsActivity extends Activity implements OnClickListener {
 	 */
 	private void initTitleView() {
 		LinearLayout iconLayout = (LinearLayout) findViewById(R.id.titlelinearLayout1);
-		TextView title=(TextView) findViewById(R.id.titleTextView1);
+		TextView title = (TextView) findViewById(R.id.titleTextView1);
 		title.setText("频道列表");
 		iconLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				doExit();                                                
+				doExit();
 			}
 		});
 	}
@@ -218,16 +224,16 @@ public class MyChannalsActivity extends Activity implements OnClickListener {
 
 	private void doRefreshCh() {
 		Toast.makeText(this, "Do 刷新频道", Toast.LENGTH_SHORT).show();
-		renderListView();
+		refreshListView();
 	}
 
 	private void doAddCh() {
 		Toast.makeText(this, "Do 添加频道", Toast.LENGTH_SHORT).show();
 		Intent intent = new Intent(this, AddChannalActivity.class);
-//		Bundle bundle = new Bundle();
-//		bundle.putString(NameSpacesOfMy.BUNDLE_KEY_INTENT_URL, url);
-//		intent.putExtras(bundle);
-		startActivityForResult(intent,0);
+		// Bundle bundle = new Bundle();
+		// bundle.putString(NameSpacesOfMy.BUNDLE_KEY_INTENT_URL, url);
+		// intent.putExtras(bundle);
+		startActivityForResult(intent, 0);
 	}
 
 }

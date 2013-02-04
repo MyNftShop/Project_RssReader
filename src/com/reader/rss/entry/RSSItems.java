@@ -60,7 +60,7 @@ public class RSSItems {
 		return data;
 	}
 
-	public int getItemCount() {
+	public int getCount() {
 		return itemCount;
 	}
 

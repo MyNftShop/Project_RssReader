@@ -15,23 +15,21 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
-import android.net.wifi.p2p.WifiP2pManager.Channel;
 import android.util.Log;
 
-import com.reader.rss.entry.RSSChannal;
+import com.reader.rss.entry.RSSItems;
 
-public class MyRSSChannalHelper {
+public class MyRSSItemsHelper {
 
-	private static final String TAG = "MyRSSChannalHelper";
+	private static final String TAG = "MyRSSItemsHelper";
 
 	/**
-	 * 获得频道对象，从一个URL指向的xml网络文件中
+	 * 获得信息列表，从一个URL指向的xml网络文件中
 	 * 
 	 * @param string
 	 * @return 失败返回null
 	 */
-	public RSSChannal getRSSChannalFromUrl(String url) {
-		RSSChannal channal = null;
+	public RSSItems getRSSItemsFromUrl(String url) {
 		try {
 			// 获得xml文件的输入对象
 			InputSource inputSource = getInputSourceFromUrlString(url);
@@ -41,10 +39,10 @@ public class MyRSSChannalHelper {
 				SAXParser parser = factory.newSAXParser();
 				XMLReader xmlReader = parser.getXMLReader();
 
-				ChannelHandler channelHandler = new ChannelHandler();
-				xmlReader.setContentHandler(channelHandler);
+				 RSSItemsHandler rssHandler = new RSSItemsHandler();
+				xmlReader.setContentHandler(rssHandler);
 				xmlReader.parse(inputSource);
-				return channelHandler.getChannal();
+				return rssHandler.getRSSItems();
 			}
 
 		} catch (Exception e) {
@@ -52,7 +50,7 @@ public class MyRSSChannalHelper {
 			e.printStackTrace();
 		}
 
-		return channal;
+		return null;
 	}
 
 	/**

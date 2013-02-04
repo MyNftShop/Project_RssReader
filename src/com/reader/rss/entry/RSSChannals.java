@@ -38,6 +38,7 @@ public class RSSChannals {
 	public RSSChannal getItem(int location) {
 		return itemList.get(location);
 	}
+	
 
 	/**
 	 * 得到所有的items,为列表生成所需要的数据
@@ -50,16 +51,23 @@ public class RSSChannals {
 			HashMap<String, Object> item = new HashMap<String, Object>();
 			item.put(RSSChannalColumns.KEY_TITLE, itemList.get(i).getTitle());
 			item.put(RSSChannalColumns.KEY_LINK, itemList.get(i).getLink());
-			item.put(RSSChannalColumns.KEY_DESCRIPTION, itemList.get(i).getDescription());
-			item.put(RSSChannalColumns.KEY_IMAGE_URL, itemList.get(i).getImageUrl());
+			item.put(RSSChannalColumns._ID, itemList.get(i).getId());
+			
+//			item.put(RSSChannalColumns.KEY_DESCRIPTION, itemList.get(i).getDescription());
+//			item.put(RSSChannalColumns.KEY_IMAGE_URL, itemList.get(i).getImageUrl());
 			Log.i(TAG, "item: "+item.get(RSSChannalColumns.KEY_TITLE));
 			data.add(item);
 		}
+		itemCount=data.size();
 		return data;
 	}
 
 	public int getItemCount() {
 		return itemCount;
+	}
+
+	public void clear() {
+		itemList.clear();
 	}
 
 

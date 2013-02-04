@@ -22,14 +22,17 @@ public class RSSChannal {
 	private String _link = null;
 	private String _imageUrl = null;
 	private String _description = null;
+	private long _id=0;
 	
 	public static class RSSChannalColumns implements BaseColumns {
 		private RSSChannalColumns() {
 		}
 		public static final String KEY_TITLE = "_title";
 		public static final String KEY_LINK = "_link";
-		public static final String KEY_IMAGE_URL = "_imageUrl";
-		public static final String KEY_DESCRIPTION = "_description";
+//		public static final String KEY_IMAGE_URL = "_imageUrl";
+//		public static final String KEY_DESCRIPTION = "_description";
+		public static final String KEY_ORDERBY = "order_p";
+		public static final String DEFAULT_SORT_ORDER = "order_p desc,_id desc";
 	}
 
 	
@@ -53,8 +56,15 @@ public class RSSChannal {
 	public void setDescription(String string) {
 		this._description = string;
 	}
+	public void setId(long id) {
+		this._id = id;
+	}
+	
 	public String getTitle() {
 		return this._title;
+	}
+	public long getId() {
+		return this._id;
 	}
 	public String getLink() {
 		return this._link;

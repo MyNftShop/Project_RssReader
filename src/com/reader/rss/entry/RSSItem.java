@@ -1,5 +1,6 @@
 package com.reader.rss.entry;
 
+import android.R.bool;
 import android.provider.BaseColumns;
 
 
@@ -18,16 +19,22 @@ public class RSSItem {
 	public  String _title = null;
 	public  String _pubdate = null;
 	public  String _link = null;
-	public  String _category = null;
 	public  String _description = null;
+	private long _id=0;
+	private boolean _readed;
+	private String _createDate;
+	
 	public static class RSSItemColumns implements BaseColumns {
 		private RSSItemColumns() {
 		}
 		public static final String KEY_TITLE = "title";
 		public static final String KEY_LINK = "link";
-		public static final String KEY_CATEGORY = "category";
 		public static final String KEY_DESCRIPTION = "description";
-		public static final String KEY_PUBDATE = "pubDate";
+		public static final String KEY_PUBDATE = "pubdate";
+		public static final String KEY_CHANNAL_ID = "fid";
+		public static final String KEY_CREATEDATE = "createdate";
+		public static final String KEY_READED = "readflag";
+		public static final String DEFAULT_SORT_ORDER = " createdate desc,pubdate desc";
 	}
 
 
@@ -42,8 +49,8 @@ public class RSSItem {
 		this._pubdate = string;
 	}
 
-	public void setCategory(String string) {
-		this._category = string;
+	public void setCreateDate(String string) {
+		this._createDate = string;
 	}
 
 	public void setLink(String string) {
@@ -61,9 +68,12 @@ public class RSSItem {
 	public String getPubdate() {
 		return this._pubdate ;
 	}
+	public long getId() {
+		return this._id ;
+	}
 
-	public String getCategory() {
-		return this._category ;
+	public String getCreateDate() {
+		return this._createDate ;
 	}
 
 	public String getLink() {
@@ -75,10 +85,24 @@ public class RSSItem {
 		return this._description;
 	}
 	
-	public String toString() {
-		if (this._title.length()>20) {
-			return this._title.subSequence(0, 42)+"...";
-		}
-		return _category;
+//	public String toString() {
+//		if (this._title.length()>20) {
+//			return this._title.subSequence(0, 42)+"...";
+//		}
+//		return this._link;
+//	}
+
+	public void setId(long id) {
+		// TODO Auto-generated method stub
+		this._id=id;
 	}
+
+	public void setReadFlag(int i ) {
+		this._readed=(i>0?true:false);
+	}	
+	public boolean getReadFlag( ) {
+		// TODO Auto-generated method stub
+		return this._readed;
+	}
+
 }

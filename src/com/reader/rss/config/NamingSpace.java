@@ -19,6 +19,12 @@ public class NamingSpace {
 	public static final String CHANNALS_TABLENAME = "channals";
 
 	public static final String KEY_OPRATION = "operation";
+
+	public static final String ITEMS_TABLENAME = "items";
+
+	public static final String BUNDLE_KEY_INTENT_ID = "id";
+
+	public static final String DATETIME_FORMAT = "yyyy-MM-dd kk:mm:ss";
 	
 
 }
