@@ -9,7 +9,6 @@ package com.reader.rss.config;
  * @phone +86 15237210133
  */
 public class NamingSpace {
-	public static final String BUNDLE_KEY_INTENT_URL = "url";
 	
 	//FOR DATABASE
 	public static final String DB_DABASENAME = "database";
@@ -22,9 +21,14 @@ public class NamingSpace {
 
 	public static final String ITEMS_TABLENAME = "items";
 
+	public static final String BUNDLE_KEY_INTENT_TITLE = "title";
+	public static final String BUNDLE_KEY_INTENT_URL = "url";
 	public static final String BUNDLE_KEY_INTENT_ID = "id";
 
 	public static final String DATETIME_FORMAT = "yyyy-MM-dd kk:mm:ss";
+
+	public static final String DEFAULT_TIME_FORMAT =  "yyyy-MM-dd kk:mm:ss";;
+
 	
 
 }

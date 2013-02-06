@@ -12,12 +12,17 @@ import java.nio.charset.Charset;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import android.util.Log;
 
 import com.reader.rss.entry.RSSItems;
+import com.reader.rss.lib.CustomHttpClient;
 
 public class MyRSSItemsHelper {
 
@@ -49,7 +54,6 @@ public class MyRSSItemsHelper {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 
@@ -74,8 +78,12 @@ public class MyRSSItemsHelper {
 		String encodingName = charset.name();
 		// 2：通过InputStreamReader设定好编码
 		// ，然后将然后将InputStreamReader
-		// 通过InputSource的构造方法传给InputSource
-		InputStream inputStream = url.openStream();
+		// 获得inputStream
+		HttpClient httpClient=CustomHttpClient.getHttpClient();
+		HttpGet request=new HttpGet(urlString);
+		HttpResponse response;
+		response=httpClient.execute(request);
+		InputStream inputStream =response.getEntity().getContent();
 		// 通过InputStreamReader设定编码方式
 		InputStreamReader streamReader = new InputStreamReader(inputStream,
 				encodingName);

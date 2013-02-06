@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="163" >
+                android:text="虎扑体育" >
 
                 <requestFocus />
             </EditText>
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="http://sports.163.com/special/00051K7F/rss_sportslq.xml" />
+                android:text="http://feeds.hupu.com/c/33523/f/585511/index.rss" />
 
         </TableRow>
 

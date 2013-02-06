@@ -34,7 +34,7 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name="com.reader.rss.MyRssDetailActivity"
+            android:name="com.reader.rss.WebViewActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity

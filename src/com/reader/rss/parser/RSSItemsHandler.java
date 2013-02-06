@@ -50,6 +50,8 @@ public class RSSItemsHandler extends DefaultHandler {
 
 	private String descString = "";
 
+	private String tmpString=null;
+
 	/**
 	 * 获得存储了数据的FEED对象
 	 * 
@@ -92,6 +94,7 @@ public class RSSItemsHandler extends DefaultHandler {
 		}
 		if (localName.equals("description")) {
 			currentstate = RSS_DESC;
+			tmpString=new String();
 			return;
 		}
 		if (localName.equals("link")) {
@@ -113,6 +116,11 @@ public class RSSItemsHandler extends DefaultHandler {
 	public void endElement(String uri, String localName, String qName) {
 		Log.e(TAG, "Localname E: " + localName );
 		localName = localName.toLowerCase();
+		if (localName.equals("description")) {
+			rssItem.setDescription(tmpString);
+			tmpString=null;
+			currentstate=0;
+		}
 		if (localName.equals("item")) {
 			rssItems.addItem(rssItem);
 			return;
@@ -138,8 +146,8 @@ public class RSSItemsHandler extends DefaultHandler {
 //				Log.i(TAG, "Description characters=" + string);
 //				descString += string;
 //			}
-			rssItem.setDescription(string);
-			 currentstate=0;//set 0 on endElement
+			tmpString+=string;
+//			 currentstate=0;//set 0 on endElement
 			break;
 		case RSS_LINK:
 			rssItem.setLink(string);

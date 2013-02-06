@@ -43,7 +43,7 @@ public class RSSItems {
 
 	/**
 	 * 得到所有的items,为列表生成所需要的数据
-	 * @return
+	 * @return 空的数据列表，或是有items
 	 */
 	public List getAllItemsForListView() {
 		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();

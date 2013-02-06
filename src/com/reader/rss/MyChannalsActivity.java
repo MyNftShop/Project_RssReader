@@ -95,6 +95,7 @@ public class MyChannalsActivity extends Activity implements OnClickListener {
 		Log.i("tag", "GotoChannal:"+ position+arrayList.get(position).get(RSSChannalColumns.KEY_TITLE));
 		Intent intent = new Intent(this, MyChannalActivity.class);
 		Bundle bundle = new Bundle();
+		bundle.putString(NamingSpace.BUNDLE_KEY_INTENT_TITLE, (String)arrayList.get(position).get(RSSChannalColumns.KEY_TITLE));	
 		bundle.putString(NamingSpace.BUNDLE_KEY_INTENT_URL, (String)arrayList.get(position).get(RSSChannalColumns.KEY_LINK));	
 		bundle.putLong(NamingSpace.BUNDLE_KEY_INTENT_ID, (Long) arrayList.get(position).get(RSSChannalColumns._ID));
 		intent.putExtras(bundle);

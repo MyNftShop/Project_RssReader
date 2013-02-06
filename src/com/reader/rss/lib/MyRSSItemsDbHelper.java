@@ -20,47 +20,50 @@ import com.reader.rss.entry.RSSItem;
 import com.reader.rss.entry.RSSItem.RSSItemColumns;
 import com.reader.rss.entry.RSSItems;
 
+/**
+ * 描述或功能：本地数据库操作RSSItems
+ */
 public class MyRSSItemsDbHelper extends BaseContentDbHelper {
 
-	/**
-	 * 获得信息列表，根据sort order
-	 * 
-	 * @param sortOrder
-	 * @return {@link RSSChannals}
-	 */
-	public RSSItems getRSSItems(String sortOrder) {
-
-		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-		qb.setTables(NamingSpace.ITEMS_TABLENAME);
-		String orderBy;
-		if (TextUtils.isEmpty(sortOrder)) {
-			orderBy = RSSItemColumns.DEFAULT_SORT_ORDER;
-		} else {
-			orderBy = sortOrder;
-		}
-
-		SQLiteDatabase db = mOpenHelper.getReadableDatabase();
-		Cursor cursor = qb.query(db, null, null, null, null, null, orderBy,
-				null);
-
-		RSSItems items = new RSSItems();
-		RSSItem item = null;
-		while (cursor.moveToNext()) {
-			// add
-			item = new RSSItem();
-
-			item.setTitle(cursor.getString(cursor
-					.getColumnIndex(RSSItemColumns.KEY_TITLE)));
-			item.setLink(cursor.getString(cursor
-					.getColumnIndex(RSSItemColumns.KEY_LINK)));
-			item.setId(cursor.getLong(cursor.getColumnIndex(RSSItemColumns._ID)));
-
-			items.addItem(item);
-		}
-
-		return items;
-
-	}
+//	/**
+//	 * 获得信息列表，根据sort order
+//	 * 
+//	 * @param sortOrder
+//	 * @return {@link RSSChannals}
+//	 */
+//	public RSSItems getRSSItems(String sortOrder) {
+//
+//		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+//		qb.setTables(NamingSpace.ITEMS_TABLENAME);
+//		String orderBy;
+//		if (TextUtils.isEmpty(sortOrder)) {
+//			orderBy = RSSItemColumns.DEFAULT_SORT_ORDER;
+//		} else {
+//			orderBy = sortOrder;
+//		}
+//
+//		SQLiteDatabase db = mOpenHelper.getReadableDatabase();
+//		Cursor cursor = qb.query(db, null, null, null, null, null, orderBy,
+//				null);
+//
+//		RSSItems items = new RSSItems();
+//		RSSItem item = null;
+//		while (cursor.moveToNext()) {
+//			// add
+//			item = new RSSItem();
+//
+//			item.setTitle(cursor.getString(cursor
+//					.getColumnIndex(RSSItemColumns.KEY_TITLE)));
+//			item.setLink(cursor.getString(cursor
+//					.getColumnIndex(RSSItemColumns.KEY_LINK)));
+//			item.setId(cursor.getLong(cursor.getColumnIndex(RSSItemColumns._ID)));
+//
+//			items.addItem(item);
+//		}
+//
+//		return items;
+//
+//	}
 
 	public MyRSSItemsDbHelper(Context context) {
 		mOpenHelper = new DatabaseHelper(context);
@@ -91,15 +94,14 @@ public class MyRSSItemsDbHelper extends BaseContentDbHelper {
 
 	}
 
-	/**
-	 * 
-	 * @param channalId
-	 * @param sortOrder
-	 * @return null or items
-	 */
-
+/**
+ * 获得itmes列表，根据channalID
+ * @param channalId
+ * @param sortOrder
+ * @return	查询失败返回null,成功返回列表(数据个数可能是空的)
+ */
 	public RSSItems getRSSItemsByChanId(long channalId, String sortOrder) {
-		RSSItems items = new RSSItems();
+		RSSItems items = null;
 		try {
 			SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 			qb.setTables(NamingSpace.ITEMS_TABLENAME);
@@ -115,6 +117,7 @@ public class MyRSSItemsDbHelper extends BaseContentDbHelper {
 					+ "= ? ", new String[] { channalId + "" }, null, null,
 					orderBy, null);
 
+			items=new RSSItems();
 			RSSItem item = null;
 			while (cursor.moveToNext()) {
 				item = new RSSItem();
@@ -136,10 +139,10 @@ public class MyRSSItemsDbHelper extends BaseContentDbHelper {
 
 				items.addItem(item);
 			}
+			Log.i("tag", "查询成功");
 		} catch (Exception e) {
 			Log.i("tag", "查询出错，没有返回值");
 		}
-
 		return items;
 	}
 
